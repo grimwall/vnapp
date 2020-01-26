@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,10 +23,11 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "DOCTOR", schema = "VENGEANCE")
-public class Doctor implements Serializable {
+public class DoctorEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

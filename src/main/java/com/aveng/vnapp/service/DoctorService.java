@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aveng.vnapp.domain.Doctor;
+import com.aveng.vnapp.domain.DoctorEntity;
 import com.aveng.vnapp.repository.DoctorRepository;
 import com.aveng.vnapp.service.dto.DoctorDTO;
 import com.aveng.vnapp.service.mapper.DoctorMapper;
@@ -29,15 +29,15 @@ public class DoctorService {
     public List<DoctorDTO> retrieveDoctors() {
         return doctorRepository.findAll()
             .stream()
-            .map(doctor -> doctorMapper.map(doctor))
+            .map(doctorEntity -> doctorMapper.map(doctorEntity))
             .collect(Collectors.toList());
     }
 
     public DoctorDTO createDoctor(DoctorDTO doctorDTO) {
-        Doctor doctor = doctorMapper.map(doctorDTO);
+        DoctorEntity doctorEntity = doctorMapper.map(doctorDTO);
 
-        Doctor savedDoctor = doctorRepository.save(doctor);
+        DoctorEntity savedDoctorEntity = doctorRepository.save(doctorEntity);
 
-        return doctorMapper.map(savedDoctor);
+        return doctorMapper.map(savedDoctorEntity);
     }
 }

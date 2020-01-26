@@ -2,7 +2,7 @@ package com.aveng.vnapp.service.mapper;
 
 import org.mapstruct.Mapper;
 
-import com.aveng.vnapp.domain.Doctor;
+import com.aveng.vnapp.domain.DoctorEntity;
 import com.aveng.vnapp.service.dto.DoctorDTO;
 
 /**
@@ -11,7 +11,7 @@ import com.aveng.vnapp.service.dto.DoctorDTO;
 @Mapper(componentModel = "spring")
 public interface DoctorMapper {
 
-    Doctor map(DoctorDTO doctorDTO);
+    DoctorEntity map(DoctorDTO doctorDTO);
 
-    DoctorDTO map(Doctor doctor);
+    DoctorDTO map(DoctorEntity doctorEntity);
 }

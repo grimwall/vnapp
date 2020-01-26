@@ -1,9 +1,6 @@
 package com.aveng.vnapp.service.dto;
 
-import java.math.BigDecimal;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoctorDTO {
+public class PatientDTO {
 
     private String id;
 
@@ -30,6 +27,4 @@ public class DoctorDTO {
     @Size(max = 250)
     private String lastName;
 
-    @NotNull
-    private BigDecimal hourlyRate;
 }
