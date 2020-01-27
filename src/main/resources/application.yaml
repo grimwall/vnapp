@@ -42,3 +42,5 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
+  mvc:
+    log-resolved-exception: false
