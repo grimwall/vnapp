@@ -4,11 +4,13 @@ import org.slf4j.event.Level;
 import org.springframework.http.HttpStatus;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
  * Our base ApplicationException for all custom exceptions
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 public class ApplicationException extends RuntimeException {
@@ -20,6 +22,10 @@ public class ApplicationException extends RuntimeException {
     public ApplicationException(HttpStatus status, String message) {
         super(message);
         this.status = status.value();
+    }
+
+    public ApplicationException(String message) {
+        super(message);
     }
 
     public ApplicationException(HttpStatus status, String message, Throwable cause) {

@@ -41,8 +41,8 @@ public class TransactionEntity extends BaseEntity {
     @Column(name = "PATIENT_ID", length = 36)
     private String patientId;
 
-    @Column(name = "CREATION_DATE")
-    private OffsetDateTime creationDate;
+    @Column(name = "TRANSACTION_DATE")
+    private OffsetDateTime transactionDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")

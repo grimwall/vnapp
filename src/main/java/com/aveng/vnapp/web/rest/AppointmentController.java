@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +46,29 @@ public class AppointmentController {
 
     @PostMapping
     public ResponseEntity<AppointmentDTO> createAppointment(@Valid @RequestBody AppointmentDTO appointmentDTO) {
+
         log.info(String.format("got a new appointment request: %s", appointmentDTO));
-        return new ResponseEntity<>(appointmentDTO, HttpStatus.CREATED);
+
+        AppointmentDTO reserveAppointment = appointmentService.reserveAppointment(appointmentDTO);
+
+        return new ResponseEntity<>(reserveAppointment, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{id}/finalize")
+    public ResponseEntity<AppointmentDTO> finalize(@PathVariable String id) {
+
+        log.info(String.format("got a new appointment finalize request: %s", id));
+
+        AppointmentDTO finalizedAppointment = appointmentService.finalize(id);
+
+        return new ResponseEntity<>(finalizedAppointment, HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<AppointmentDTO> cancel(@PathVariable String id) {
+
+        AppointmentDTO cancelledAppointment = appointmentService.cancel(id);
+
+        return new ResponseEntity<>(cancelledAppointment, HttpStatus.OK);
     }
 }

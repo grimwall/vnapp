@@ -1,6 +1,7 @@
 package com.aveng.vnapp.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,12 @@ public class PatientService {
             .stream()
             .map(entity -> patientMapper.map(entity))
             .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<PatientDTO> retrievePatient(String patientID) {
+        return Optional.ofNullable(patientID)
+            .flatMap(id -> patientRepository.findById(id))
+            .map(entity -> patientMapper.map(entity));
     }
 }

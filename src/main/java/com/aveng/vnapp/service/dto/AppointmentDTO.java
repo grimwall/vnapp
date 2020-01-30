@@ -5,6 +5,7 @@ import static com.aveng.vnapp.domain.DomainConstants.UUID_SIZE;
 import java.time.OffsetDateTime;
 
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -41,7 +42,9 @@ public class AppointmentDTO {
     private OffsetDateTime startDate;
 
     //in minutes
+    @Min(Constants.MIN_DURATION)
     @Max(Constants.MAX_DURATION)
+    @NotNull
     private int duration;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.OFFSET_DATE_TIME_FORMAT)

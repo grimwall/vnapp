@@ -27,7 +27,7 @@ public class TransactionDTO {
     private String patientId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.OFFSET_DATE_TIME_FORMAT)
-    private OffsetDateTime creationDate;
+    private OffsetDateTime transactionDate;
 
     private TransactionType type;
 

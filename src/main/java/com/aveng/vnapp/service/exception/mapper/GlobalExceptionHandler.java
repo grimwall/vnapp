@@ -1,7 +1,5 @@
 package com.aveng.vnapp.service.exception.mapper;
 
-import java.util.Objects;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -17,7 +15,10 @@ import com.aveng.vnapp.web.rest.model.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * All exceptions and their logging requirements are handled here. Add more Exception handlers for each custom exception
+ * All exceptions and their logging requirements are first handled here.
+ * Add more Exception handlers for each custom exception
+ *
+ * @author apaydin
  */
 @Slf4j
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -25,54 +26,18 @@ import lombok.extern.slf4j.Slf4j;
 public class GlobalExceptionHandler {
 
     private SpringExceptionHandler springExceptionHandler;
+    private ApplicationExceptionHandler applicationExceptionHandler;
 
-    public GlobalExceptionHandler(SpringExceptionHandler springExceptionHandler) {
+    public GlobalExceptionHandler(SpringExceptionHandler springExceptionHandler,
+        ApplicationExceptionHandler applicationExceptionHandler) {
         this.springExceptionHandler = springExceptionHandler;
+        this.applicationExceptionHandler = applicationExceptionHandler;
     }
 
     @ExceptionHandler(value = { ApplicationException.class })
     public ResponseEntity<ApiResponse<String>> handleApplicationException(final ApplicationException ex,
         final WebRequest request) {
-        return mapApplicationException(ex);
-    }
-
-    /**
-     * Will log and map an {@link ApplicationException} and return a meaningful response
-     *
-     * @param exception
-     * @return an {@link ApiResponse} with meaningful error messages
-     */
-    public ResponseEntity<ApiResponse<String>> mapApplicationException(final ApplicationException exception) {
-        String errorMessage = Objects.toString(exception.getMessage(), "OOPS! error");
-
-        if (exception.getLevel() != null) {
-            switch (exception.getLevel()) {
-                case ERROR:
-                    log.error(errorMessage, exception);
-                    break;
-                case WARN:
-                    log.warn(errorMessage, exception);
-                    break;
-                case INFO:
-                    log.info(errorMessage, exception);
-                    break;
-                case DEBUG:
-                    log.debug(errorMessage, exception);
-                    break;
-                case TRACE:
-                    log.trace(errorMessage, exception);
-                    break;
-            }
-        } else {
-            log.error(errorMessage, exception);
-        }
-
-        ApiResponse<String> apiResponse = ApiResponse.<String>builder().message(errorMessage)
-            .responseCode(exception.getStatus())
-            .data(ExceptionUtils.getStackTrace(exception))
-            .build();
-
-        return new ResponseEntity<>(apiResponse, HttpStatus.valueOf(exception.getStatus()));
+        return applicationExceptionHandler.mapApplicationException(ex);
     }
 
     /**
