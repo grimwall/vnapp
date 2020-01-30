@@ -30,11 +30,11 @@ public class AppointmentDTO {
 
     @NotBlank
     @Size(max = UUID_SIZE, min = UUID_SIZE)
-    private String doctorID;
+    private String doctorId;
 
     @NotBlank
     @Size(max = UUID_SIZE, min = UUID_SIZE)
-    private String patientID;
+    private String patientId;
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.OFFSET_DATE_TIME_FORMAT)
@@ -47,5 +47,5 @@ public class AppointmentDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.OFFSET_DATE_TIME_FORMAT)
     private OffsetDateTime endDate;
 
-    private AppointmentState appointmentState;
+    private AppointmentState state;
 }

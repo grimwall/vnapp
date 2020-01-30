@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aveng.vnapp.domain.DoctorEntity;
 import com.aveng.vnapp.repository.DoctorRepository;
@@ -26,6 +27,7 @@ public class DoctorService {
         this.doctorRepository = doctorRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<DoctorDTO> retrieveDoctors() {
         return doctorRepository.findAll()
             .stream()
@@ -33,6 +35,7 @@ public class DoctorService {
             .collect(Collectors.toList());
     }
 
+    @Transactional
     public DoctorDTO createDoctor(DoctorDTO doctorDTO) {
         DoctorEntity doctorEntity = doctorMapper.map(doctorDTO);
 

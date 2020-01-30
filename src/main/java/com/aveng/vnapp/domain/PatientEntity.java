@@ -1,7 +1,5 @@
 package com.aveng.vnapp.domain;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -23,10 +21,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "DOCTOR", schema = "VENGEANCE")
-public class DoctorEntity extends BaseEntity {
+@Table(name = "PATIENT", schema = "VENGEANCE")
+public class PatientEntity extends BaseEntity {
 
-    private static final long serialVersionUID = 12432L;
+    private static final long serialVersionUID = 12433232L;
 
     @Size(max = 250)
     @Column(name = "FIRST_NAME", length = 250)
@@ -35,7 +33,4 @@ public class DoctorEntity extends BaseEntity {
     @Size(max = 250)
     @Column(name = "LAST_NAME", length = 250)
     private String lastName;
-
-    @Column(name = "HOURLY_RATE")
-    private BigDecimal hourlyRate;
 }

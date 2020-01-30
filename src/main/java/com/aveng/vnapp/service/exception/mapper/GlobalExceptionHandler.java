@@ -16,6 +16,9 @@ import com.aveng.vnapp.web.rest.model.ApiResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * All exceptions and their logging requirements are handled here. Add more Exception handlers for each custom exception
+ */
 @Slf4j
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
@@ -33,6 +36,12 @@ public class GlobalExceptionHandler {
         return mapApplicationException(ex);
     }
 
+    /**
+     * Will log and map an {@link ApplicationException} and return a meaningful response
+     *
+     * @param exception
+     * @return an {@link ApiResponse} with meaningful error messages
+     */
     public ResponseEntity<ApiResponse<String>> mapApplicationException(final ApplicationException exception) {
         String errorMessage = Objects.toString(exception.getMessage(), "OOPS! error");
 
@@ -66,6 +75,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiResponse, HttpStatus.valueOf(exception.getStatus()));
     }
 
+    /**
+     * All exceptions except custom ones are handled here
+     *
+     * @param ex the exception to be handled
+     * @param request We pass this to the default spring handler
+     * @return A meaningful response
+     */
     @ExceptionHandler(value = { Exception.class })
     public ResponseEntity<Object> handleAll(final Exception ex, final WebRequest request) {
 
@@ -74,7 +90,7 @@ public class GlobalExceptionHandler {
             log.warn("Spring specific exception", ex);
             return responseEntity;
         } catch (Exception e) {
-            //A non spring specific exception
+            //A non spring specific exception, last stop for all exceptions
             log.error("Unhandled exception", ex);
 
             ApiResponse<String> apiResponse = ApiResponse.<String>builder().message("Unhandled exception")
