@@ -6,7 +6,7 @@ import java.time.OffsetDateTime;
 
 import javax.validation.constraints.Size;
 
-import com.aveng.vnapp.service.dto.enums.AppointmentState;
+import com.aveng.vnapp.domain.enums.AppointmentState;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;

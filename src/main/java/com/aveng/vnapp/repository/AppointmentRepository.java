@@ -16,10 +16,16 @@ import com.aveng.vnapp.domain.AppointmentEntity;
 @Repository
 public interface AppointmentRepository extends JpaRepository<AppointmentEntity, String> {
 
-    @Query(value = "from AppointmentEntity t where :doctorId = t.doctorId "
-        + "and t.state <> 'CANCELLED' "
-        + "and ((:startDate between t.startDate and t.endDate) "
-        + "or (:endDate between t.startDate and t.endDate) "
+    /**
+     * Finds all appointments that would conflict with a given start - end date for a specific date
+     *
+     * @param startDate beginning of the requested appointment
+     * @param endDate end of the requested appointment
+     * @param doctorId id of the doctor
+     * @return a {@link List} of conflicting Appointment entities
+     */
+    @Query(value = "from AppointmentEntity t where :doctorId = t.doctorId " + "and t.state <> 'CANCELLED' "
+        + "and ((:startDate between t.startDate and t.endDate) " + "or (:endDate between t.startDate and t.endDate) "
         + "or (:startDate <= t.startDate and :endDate >= t.endDate))")
     List<AppointmentEntity> findAllConflictingValidEvents(@Param("startDate") Instant startDate,
         @Param("endDate") Instant endDate, @Param("doctorId") String doctorId);

@@ -16,8 +16,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ApplicationException extends RuntimeException {
 
+    /**
+     *  Http status of the response
+     */
     private int status = HttpStatus.INTERNAL_SERVER_ERROR.value();
 
+    /**
+     * Log level of the exception
+     */
     private Level level = Level.ERROR;
 
     public ApplicationException(HttpStatus status, String message) {

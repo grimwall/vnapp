@@ -6,9 +6,11 @@ import java.time.ZoneOffset;
 import java.util.Optional;
 
 /**
+ * Handles all {@link OffsetDateTime} {@link Instant} conversions
+ *
  * @author apaydin
  */
-public class DateUtil {
+public class OffsetDateTimeUtil {
 
     public static OffsetDateTime convertInstantUTCtoOffsetDateTime(Instant instant) {
         return Optional.ofNullable(instant)

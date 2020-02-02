@@ -20,9 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ApplicationExceptionHandler {
 
     /**
-     * Will log and map an {@link ApplicationException} and return a meaningful response
+     * Will log and map an {@link ApplicationException} and return a meaningful response.
      *
-     * @param exception
+     * @param exception {@link ApplicationException} to be handled
      * @return an {@link ApiResponse} with meaningful error messages
      */
     public ResponseEntity<ApiResponse<String>> mapApplicationException(final ApplicationException exception) {

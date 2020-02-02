@@ -46,6 +46,8 @@ public class PatientController {
     @PostMapping
     public ResponseEntity<PatientDTO> createPatient(@Valid @RequestBody PatientDTO patientDTO) {
         log.info(String.format("got a new patient request: %s", patientDTO));
-        return new ResponseEntity<>(patientDTO, HttpStatus.CREATED);
+
+        PatientDTO created = patientService.createPatient(patientDTO);
+        return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import com.aveng.vnapp.service.dto.enums.AppointmentState;
+import com.aveng.vnapp.domain.enums.AppointmentState;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

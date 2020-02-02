@@ -3,7 +3,7 @@ package com.aveng.vnapp.service.dto;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-import com.aveng.vnapp.service.dto.enums.TransactionType;
+import com.aveng.vnapp.domain.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;

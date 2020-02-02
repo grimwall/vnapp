@@ -32,7 +32,6 @@ public class AppointmentService {
     private AppointmentFinalizationService finalizationService;
     private AppointmentCancellationService cancellationService;
 
-
     public AppointmentService(AppointmentMapper appointmentMapper, AppointmentRepository appointmentRepository,
         TransactionService transactionService, AppointmentReservationService reservationService,
         AppointmentFinalizationService finalizationService, AppointmentCancellationService cancellationService) {
@@ -53,6 +52,12 @@ public class AppointmentService {
             .collect(Collectors.toList());
     }
 
+    /**
+     * Searches for appointments based on the parameters in {@link AppointmentSearchRequest}
+     *
+     * @param searchRequest Search parameters wrapper object
+     * @return a {@link List} of matching appointments
+     */
     @Transactional(readOnly = true)
     public List<AppointmentDTO> searchAppointments(AppointmentSearchRequest searchRequest) {
 

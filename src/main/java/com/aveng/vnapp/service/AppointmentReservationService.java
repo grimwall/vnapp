@@ -1,6 +1,6 @@
 package com.aveng.vnapp.service;
 
-import static com.aveng.vnapp.service.dto.enums.AppointmentState.RESERVED;
+import static com.aveng.vnapp.domain.enums.AppointmentState.RESERVED;
 import static com.aveng.vnapp.service.exception.ApplicationException.getValidationException;
 
 import java.time.Instant;
@@ -16,7 +16,7 @@ import com.aveng.vnapp.service.dto.AppointmentDTO;
 import com.aveng.vnapp.service.dto.DoctorDTO;
 import com.aveng.vnapp.service.dto.PatientDTO;
 import com.aveng.vnapp.service.mapper.AppointmentMapper;
-import com.aveng.vnapp.service.util.DateUtil;
+import com.aveng.vnapp.service.util.OffsetDateTimeUtil;
 
 /**
  * @author apaydin
@@ -37,6 +37,12 @@ public class AppointmentReservationService {
         this.patientService = patientService;
     }
 
+    /**
+     * Checks for availability of requested time slot and creates a new reservation appointment.
+     *
+     * @param requestDTO the requested appointment
+     * @return the newly created Appointment
+     */
     @Transactional
     public AppointmentDTO reserve(AppointmentDTO requestDTO) {
 
@@ -48,7 +54,7 @@ public class AppointmentReservationService {
             .orElseThrow(() -> getValidationException("Cannot find the required patient"));
 
         //calculate end date and check if the doctor is free at that time
-        Instant startDate = DateUtil.convertOffsetDateTimeToUTCInstant(requestDTO.getStartDate());
+        Instant startDate = OffsetDateTimeUtil.convertOffsetDateTimeToUTCInstant(requestDTO.getStartDate());
         Instant endDate = startDate.plus(requestDTO.getDuration(), ChronoUnit.MINUTES);
 
         validateFreeAppointmentSlot(doctorDTO.getId(), startDate, endDate);

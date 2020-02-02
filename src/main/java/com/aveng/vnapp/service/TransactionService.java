@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aveng.vnapp.domain.TransactionEntity;
+import com.aveng.vnapp.domain.enums.TransactionType;
 import com.aveng.vnapp.repository.TransactionRepository;
 import com.aveng.vnapp.service.dto.TransactionDTO;
-import com.aveng.vnapp.service.dto.enums.TransactionType;
 import com.aveng.vnapp.service.mapper.TransactionMapper;
 
 /**

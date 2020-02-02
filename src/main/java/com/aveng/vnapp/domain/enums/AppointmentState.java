@@ -1,4 +1,4 @@
-package com.aveng.vnapp.service.dto.enums;
+package com.aveng.vnapp.domain.enums;
 
 /**
  * @author apaydin

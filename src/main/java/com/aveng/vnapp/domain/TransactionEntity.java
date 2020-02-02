@@ -10,7 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import com.aveng.vnapp.service.dto.enums.TransactionType;
+import com.aveng.vnapp.domain.enums.TransactionType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

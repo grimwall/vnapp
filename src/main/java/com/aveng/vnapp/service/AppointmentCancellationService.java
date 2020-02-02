@@ -1,6 +1,6 @@
 package com.aveng.vnapp.service;
 
-import static com.aveng.vnapp.service.dto.enums.AppointmentState.FINALIZED;
+import static com.aveng.vnapp.domain.enums.AppointmentState.FINALIZED;
 import static com.aveng.vnapp.service.exception.ApplicationException.getValidationException;
 
 import java.math.BigDecimal;
@@ -14,14 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.aveng.vnapp.domain.AppointmentEntity;
+import com.aveng.vnapp.domain.enums.AppointmentState;
 import com.aveng.vnapp.repository.AppointmentRepository;
 import com.aveng.vnapp.service.dto.AppointmentDTO;
 import com.aveng.vnapp.service.dto.TransactionDTO;
-import com.aveng.vnapp.service.dto.enums.AppointmentState;
 import com.aveng.vnapp.service.exception.ApplicationException;
 import com.aveng.vnapp.service.mapper.AppointmentMapper;
 
 /**
+ * Handles all logic for Appointment cancellation
+ *
  * @author apaydin
  */
 @Service
@@ -41,6 +43,12 @@ public class AppointmentCancellationService {
         this.transactionService = transactionService;
     }
 
+    /**
+     * Cancels the required appointment and if eligible for cancellation fee, creates a transaction with cancelled status.
+     *
+     * @param appointmentId The id of the appointment to be cancelled
+     * @return the updated Appointment
+     */
     @Transactional
     public AppointmentDTO cancel(String appointmentId) {
 
@@ -83,8 +91,7 @@ public class AppointmentCancellationService {
     }
 
     private boolean isEligibleForLateCancelFee(AppointmentEntity appointmentEntity) {
-        return Instant.now().until(appointmentEntity.getEndDate(), ChronoUnit.MINUTES)
-            <= LATE_CANCEL_THRESHOLD_MINUTES;
+        return Instant.now().until(appointmentEntity.getEndDate(), ChronoUnit.MINUTES) <= LATE_CANCEL_THRESHOLD_MINUTES;
     }
 
     private void addTransactionIds(AppointmentDTO appointmentDTO) {

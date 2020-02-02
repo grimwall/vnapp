@@ -11,14 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aveng.vnapp.domain.AppointmentEntity;
 import com.aveng.vnapp.domain.TransactionEntity;
+import com.aveng.vnapp.domain.enums.AppointmentState;
 import com.aveng.vnapp.repository.AppointmentRepository;
 import com.aveng.vnapp.service.dto.AppointmentDTO;
 import com.aveng.vnapp.service.dto.DoctorDTO;
-import com.aveng.vnapp.service.dto.enums.AppointmentState;
 import com.aveng.vnapp.service.exception.ApplicationException;
 import com.aveng.vnapp.service.mapper.AppointmentMapper;
 
 /**
+ * Handles all logic for Appointment finalization
+ *
  * @author apaydin
  */
 @Service
@@ -38,6 +40,13 @@ public class AppointmentFinalizationService {
         this.transactionService = transactionService;
     }
 
+    /**
+     * Finalizes a given appointment that is in RESERVED status. Creates a transaction based on the hourly rate of the
+     * associated doctor
+     *
+     * @param appointmentId Appointment id
+     * @return Updated appointment
+     */
     @Transactional
     public AppointmentDTO finalize(String appointmentId) {
 
