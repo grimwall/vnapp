@@ -79,7 +79,8 @@ public class AppointmentFinalizationService {
     }
 
     private BigDecimal calculateTotalCost(AppointmentEntity appointmentEntity, BigDecimal hourlyRate) {
-        return hourlyRate.multiply(BigDecimal.valueOf(
-            appointmentEntity.getStartDate().until(appointmentEntity.getEndDate(), ChronoUnit.MINUTES)));
+        return hourlyRate.divide(BigDecimal.valueOf(60))
+            .multiply(BigDecimal.valueOf(
+                appointmentEntity.getStartDate().until(appointmentEntity.getEndDate(), ChronoUnit.MINUTES)));
     }
 }

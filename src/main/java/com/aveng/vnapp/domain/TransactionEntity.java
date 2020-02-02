@@ -48,6 +48,6 @@ public class TransactionEntity extends BaseEntity {
     @Column(name = "TYPE")
     private TransactionType type;
 
-    @Column(name = "COST")
+    @Column(name = "COST", precision = 17, scale = 2)
     private BigDecimal cost;
 }

@@ -2,6 +2,7 @@ package com.aveng.vnapp.service.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,5 +32,6 @@ public class DoctorDTO {
     private String lastName;
 
     @NotNull
+    @Min(0)
     private BigDecimal hourlyRate;
 }

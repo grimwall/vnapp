@@ -36,6 +36,6 @@ public class DoctorEntity extends BaseEntity {
     @Column(name = "LAST_NAME", length = 250)
     private String lastName;
 
-    @Column(name = "HOURLY_RATE")
+    @Column(name = "HOURLY_RATE", precision = 17, scale = 2)
     private BigDecimal hourlyRate;
 }
