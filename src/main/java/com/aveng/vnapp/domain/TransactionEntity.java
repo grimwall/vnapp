@@ -1,7 +1,7 @@
 package com.aveng.vnapp.domain;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +42,7 @@ public class TransactionEntity extends BaseEntity {
     private String patientId;
 
     @Column(name = "TRANSACTION_DATE")
-    private OffsetDateTime transactionDate;
+    private Instant transactionDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")

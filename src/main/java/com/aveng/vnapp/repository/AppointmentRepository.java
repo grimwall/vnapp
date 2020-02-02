@@ -1,6 +1,6 @@
 package com.aveng.vnapp.repository;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +21,6 @@ public interface AppointmentRepository extends JpaRepository<AppointmentEntity, 
         + "and ((:startDate between t.startDate and t.endDate) "
         + "or (:endDate between t.startDate and t.endDate) "
         + "or (:startDate <= t.startDate and :endDate >= t.endDate))")
-    List<AppointmentEntity> findAllConflictingValidEvents(@Param("startDate") OffsetDateTime startDate,
-        @Param("endDate") OffsetDateTime endDate, @Param("doctorId") String doctorId);
+    List<AppointmentEntity> findAllConflictingValidEvents(@Param("startDate") Instant startDate,
+        @Param("endDate") Instant endDate, @Param("doctorId") String doctorId);
 }

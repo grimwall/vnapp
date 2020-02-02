@@ -1,8 +1,9 @@
 package com.aveng.vnapp.service;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -32,9 +33,15 @@ public class TransactionService {
     public List<TransactionDTO> retrieveTransactions() {
 
         return transactionRepository.findAll()
-            .stream()
+            .parallelStream()
             .map(entity -> transactionMapper.map(entity))
             .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<TransactionDTO> retrieveTransaction(String id) {
+        return transactionRepository.findById(id)
+            .map(entity -> transactionMapper.map(entity));
     }
 
     @Transactional(readOnly = true)
@@ -47,18 +54,18 @@ public class TransactionService {
     }
 
     @Transactional
-    public void createFinalizeTransaction(String appointmentId, String patientId, BigDecimal totalCost) {
-        transactionRepository.save(TransactionEntity.builder()
+    public TransactionEntity createFinalizeTransaction(String appointmentId, String patientId, BigDecimal totalCost) {
+        return transactionRepository.save(TransactionEntity.builder()
             .appointmentId(appointmentId)
             .patientId(patientId)
-            .transactionDate(OffsetDateTime.now())
+            .transactionDate(Instant.now())
             .type(TransactionType.FINALIZATION)
             .cost(totalCost)
             .build());
     }
 
     @Transactional
-    public void createCancelTransaction(String appointmentId, String patientId, OffsetDateTime startDate,
+    public void createCancelTransaction(String appointmentId, String patientId, Instant startDate,
         BigDecimal cancelFee) {
         transactionRepository.save(TransactionEntity.builder()
             .appointmentId(appointmentId)

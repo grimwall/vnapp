@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
  * @author apaydin
  */
 @Data
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class DoctorDTO {

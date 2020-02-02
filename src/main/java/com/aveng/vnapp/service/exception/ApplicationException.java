@@ -8,7 +8,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * Our base ApplicationException for all custom exceptions
+ * Our base ApplicationException for all custom exceptions.
+ * Will be handled by {@link com.aveng.vnapp.service.exception.mapper.ApplicationExceptionHandler}
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -47,6 +48,16 @@ public class ApplicationException extends RuntimeException {
 
     public ApplicationException(String message, Throwable cause) {
         super(message, cause);
+    }
+
+    /**
+     * Returns a new exception with BAD_REQUEST HTTP status code that will be logged at INFO level
+     *
+     * @param s Error message
+     * @return a new ApplicationException
+     */
+    public static ApplicationException getValidationException(String s) {
+        return new ApplicationException(HttpStatus.BAD_REQUEST, s, Level.INFO);
     }
 
 }

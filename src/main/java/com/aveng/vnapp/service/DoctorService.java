@@ -1,5 +1,7 @@
 package com.aveng.vnapp.service;
 
+import static com.aveng.vnapp.service.exception.ApplicationException.getValidationException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,5 +52,22 @@ public class DoctorService {
         return Optional.ofNullable(doctorId)
             .flatMap(id -> doctorRepository.findById(id))
             .map(entity -> doctorMapper.map(entity));
+    }
+
+    @Transactional
+    public DoctorDTO updateDoctor(DoctorDTO doctorDTO, String id) {
+
+        String existingDoctorId = doctorRepository.findById(id)
+            .map(DoctorEntity::getId)
+            .orElseThrow(() -> getValidationException("Cannot find the required doctor"));
+
+        DoctorDTO updateRequest = doctorDTO.toBuilder().id(existingDoctorId).build();
+
+        DoctorEntity toBeSavedEntity = doctorMapper.map(updateRequest);
+        toBeSavedEntity.setId(existingDoctorId);
+
+        DoctorEntity updatedDoctor = doctorRepository.save(toBeSavedEntity);
+
+        return doctorMapper.map(updatedDoctor);
     }
 }

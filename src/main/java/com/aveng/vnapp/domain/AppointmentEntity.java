@@ -1,6 +1,6 @@
 package com.aveng.vnapp.domain;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,10 +41,10 @@ public class AppointmentEntity extends BaseEntity {
     private String patientId;
 
     @Column(name = "START_DATE")
-    private OffsetDateTime startDate;
+    private Instant startDate;
 
     @Column(name = "END_DATE")
-    private OffsetDateTime endDate;
+    private Instant endDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATE")
