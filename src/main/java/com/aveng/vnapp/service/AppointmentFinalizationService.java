@@ -26,6 +26,7 @@ import com.aveng.vnapp.service.mapper.AppointmentMapper;
 @Service
 public class AppointmentFinalizationService {
 
+    public static final BigDecimal MINUTES_IN_AN_HOUR = BigDecimal.valueOf(60);
     private AppointmentMapper appointmentMapper;
     private AppointmentRepository appointmentRepository;
     private DoctorService doctorService;
@@ -79,8 +80,9 @@ public class AppointmentFinalizationService {
     }
 
     private BigDecimal calculateTotalCost(AppointmentEntity appointmentEntity, BigDecimal hourlyRate) {
-        return hourlyRate.divide(BigDecimal.valueOf(60))
-            .multiply(BigDecimal.valueOf(
-                appointmentEntity.getStartDate().until(appointmentEntity.getEndDate(), ChronoUnit.MINUTES)));
+        return BigDecimal.valueOf(
+            appointmentEntity.getStartDate().until(appointmentEntity.getEndDate(), ChronoUnit.MINUTES))
+            .divide(MINUTES_IN_AN_HOUR, 6, BigDecimal.ROUND_HALF_UP)
+            .multiply(hourlyRate).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 }

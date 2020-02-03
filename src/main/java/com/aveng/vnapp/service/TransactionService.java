@@ -45,7 +45,7 @@ public class TransactionService {
     }
 
     @Transactional(readOnly = true)
-    public List<TransactionDTO> retrieveTransactionsByAppointmentId(String appointmentId) {
+    public List<TransactionDTO> retrieveTransactionsByAppointmentId(final String appointmentId) {
 
         return transactionRepository.findAllByAppointmentId(appointmentId)
             .stream()

@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "bfd6e601-0489-40ef-ad37-9d03ad166201",
+		"name": "avn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "patient",
+			"item": [
+				{
+					"name": "get patients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create patient",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"firstName\": \"Omarboy\",\r\n        \"lastName\": \"Patientoglu\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "doctor",
+			"item": [
+				{
+					"name": "get doctors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/doctors",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create doctor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\": \"ox\",\r\n\"lastName\": \"memoli\",\r\n\"hourlyRate\": 15.30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/doctors",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update doctor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\": \"updas\",\r\n\"lastName\": \"memoli\",\r\n\"hourlyRate\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/doctors/41c17c4e-8323-452d-99b4-8f2dd18b36ce",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"doctors",
+								"41c17c4e-8323-452d-99b4-8f2dd18b36ce"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "appointments",
+			"item": [
+				{
+					"name": "create appo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"doctorId\": \"d0810b24-5fc6-4c3e-aa1d-99fa6da91ec8\",\r\n\"patientId\": \"fb7b6b60-2035-4b18-80ea-20faba5fb919\",\r\n\"startDate\":\"2020-02-03T08:30+03:00\",\r\n\"duration\": 60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/appointments",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search appo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"state\": \"RESERVED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/appointments/search",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"appointments",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "finalize appo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/appointments/73f5bdbd-4baa-4ece-a029-107c97f8b725/finalize",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"appointments",
+								"73f5bdbd-4baa-4ece-a029-107c97f8b725",
+								"finalize"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel appo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/appointments/73f5bdbd-4baa-4ece-a029-107c97f8b725/cancel",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"appointments",
+								"73f5bdbd-4baa-4ece-a029-107c97f8b725",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get appointments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/appointments",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get appointment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/appointments/cd82f737-963a-4875-b725-9d12dfca5af3",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"appointments",
+								"cd82f737-963a-4875-b725-9d12dfca5af3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "transactions",
+			"item": [
+				{
+					"name": "get transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/transactions/df6b2411-76ed-4695-9b70-190fadb81ad9",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"transactions",
+								"df6b2411-76ed-4695-9b70-190fadb81ad9"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,19 +1,19 @@
 package com.aveng.vnapp.service.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class OffsetDateTimeUtilTest {
+public class OffsetDateTimeUtilTest {
 
 
     @Test
-    void convertInstantUTCtoOffsetDateTime_success() {
+    public void convertInstantUTCtoOffsetDateTime_success() {
 
         OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
         Instant instant = OffsetDateTimeUtil.convertOffsetDateTimeToUTCInstant(now);
@@ -22,7 +22,7 @@ class OffsetDateTimeUtilTest {
     }
 
     @Test
-    void convertOffsetDateTimeToUTCInstant() {
+    public void convertOffsetDateTimeToUTCInstant() {
         Instant now = Instant.now();
         OffsetDateTime convertedOffsetDateTime = OffsetDateTimeUtil.convertInstantUTCtoOffsetDateTime(now);
         assertEquals(convertedOffsetDateTime.toInstant(), now);

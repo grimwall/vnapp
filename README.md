@@ -8,10 +8,12 @@ This document explains how to compile and run this project.
 This is a Java 8 Spring Boot project meant to be built by maven.
 1. Requirements: Install the latest Java 8 SDK and Maven tool
 2. execute **'mvnw install'** (without quotes) to build and run all tests
-3. execute **'mvnw spring-boot:run'** to run the server in localhost:8080/
+3. execute **'mvnw spring-boot:run'** to run the server in localhost:8090/
 
 There are already some initial seed data in the DB to facilitate API testing, 
 simply use the provided REST endpoints to retrieve them (detailed how to below).
+
+To change the server port, edit application.yaml server.port variable
 
 ## DB restore
 
@@ -19,6 +21,9 @@ This app uses H2 file based persistence for DB operations and Flyway for DB migr
 To restore the app to it's initial state, simply delete the data folder in the project root
 
 ## API description
+
+To find some example requests that you can readily use in POSTMAN, please import avn.postman_collection.json  
+in the project root.
 
 Please use the following format for all Date/time fields:
 
@@ -207,6 +212,3 @@ Date/time format: 'yyyy-MM-dd'T'HH:mmxxx', example: 2020-01-11T12:01+03:00
             "7b4fb5b3-84ee-486c-b6f0-147cb12a5152"
         ]
     }
-               
-    
-todo

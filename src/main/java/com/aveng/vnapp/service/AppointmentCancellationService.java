@@ -83,7 +83,8 @@ public class AppointmentCancellationService {
 
             TransactionDTO finalization = transactionDTOS.get(0);
 
-            BigDecimal cancelFee = finalization.getCost().multiply(CANCEL_PENALTY_PERCENTAGE);
+            BigDecimal cancelFee =
+                finalization.getCost().multiply(CANCEL_PENALTY_PERCENTAGE).setScale(2, BigDecimal.ROUND_HALF_UP);
 
             transactionService.createCancelTransaction(appointmentEntity.getId(), appointmentEntity.getPatientId(),
                 appointmentEntity.getStartDate(), cancelFee);
@@ -91,7 +92,8 @@ public class AppointmentCancellationService {
     }
 
     private boolean isEligibleForLateCancelFee(AppointmentEntity appointmentEntity) {
-        return Instant.now().until(appointmentEntity.getEndDate(), ChronoUnit.MINUTES) <= LATE_CANCEL_THRESHOLD_MINUTES;
+        return Instant.now().until(appointmentEntity.getStartDate(), ChronoUnit.MINUTES)
+            <= LATE_CANCEL_THRESHOLD_MINUTES;
     }
 
     private void addTransactionIds(AppointmentDTO appointmentDTO) {
